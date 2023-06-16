@@ -1,5 +1,7 @@
 import { app, BrowserWindow, ipcMain, Menu, Tray } from "electron";
 import path from "path";
+const preload = path.join(__dirname, '../preload/index.js')
+
 interface IWindowsCfg {
   id: number | null;
   title: string;
@@ -96,7 +98,7 @@ export class Window {
         contextIsolation: false, //上下文隔离
         nodeIntegration: true, //启用Node集成（是否完整的支持 node）
         webSecurity: false,
-        preload: path.join(__dirname, "../electron-preload/index.js"),
+        preload: preload,
       },
     };
   }
