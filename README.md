@@ -1,16 +1,75 @@
-# Vue 3 + TypeScript + Vite
+<div align="center"> 
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+# Electron Vue Template
+  
+<img width="794" alt="image" src="https://user-images.githubusercontent.com/32544586/222748627-ee10c9a6-70d2-4e21-b23f-001dd8ec7238.png">
 
-## Recommended IDE Setup
+A simple starter template for a **Vue3** + **Electron** TypeScript based application, including **ViteJS** and **Electron Builder**.
+</div>
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+## About
 
-## Type Support For `.vue` Imports in TS
+This template utilizes [ViteJS](https://vitejs.dev) for building and serving your (Vue powered) front-end process, it provides Hot Reloads (HMR) to make development fast and easy ⚡ 
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's Take Over mode by following these steps:
+Building the Electron (main) process is done with [Electron Builder](https://www.electron.build/), which makes your application easily distributable and supports cross-platform compilation 😎
 
-1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
-2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
+## Getting started
 
-You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+Click the green **Use this template** button on top of the repository, and clone your own newly created repository.
+
+**Or..**
+
+Clone this repository: `git clone git@github.com:Deluze/electron-vue-template.git`
+
+
+### Install dependencies ⏬
+
+```bash
+npm install
+```
+
+### Start developing ⚒️
+
+```bash
+npm run dev
+```
+
+## Additional Commands
+
+```bash
+npm run dev # starts application with hot reload
+npm run build # builds application, distributable files can be found in "dist" folder
+
+# OR
+
+npm run build:win # uses windows as build target
+npm run build:mac # uses mac as build target
+npm run build:linux # uses linux as build target
+```
+
+Optional configuration options can be found in the [Electron Builder CLI docs](https://www.electron.build/cli.html).
+## Project Structure
+
+```bash
+- scripts/ # all the scripts used to build or serve your application, change as you like.
+- src/
+  - main/ # Main thread (Electron application source)
+  - renderer/ # Renderer thread (VueJS application source)
+```
+
+## Using static files
+
+If you have any files that you want to copy over to the app directory after installation, you will need to add those files in your `src/main/static` directory.
+
+#### Referencing static files from your main process
+
+```ts
+/* Assumes src/main/static/myFile.txt exists */
+
+import {app} from 'electron';
+import {join} from 'path';
+import {readFileSync} from 'fs';
+
+const path = join(app.getAppPath(), 'static', 'myFile.txt');
+const buffer = readFileSync(path);
+```
