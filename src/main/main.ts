@@ -1,10 +1,11 @@
-import {app, BrowserWindow, ipcMain, session} from 'electron';
+import {app, BrowserWindow, ipcMain, session,screen} from 'electron';
 import {join} from 'path';
 
 function createWindow () {
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: screen.getPrimaryDisplay().workAreaSize.width,
+    height: screen.getPrimaryDisplay().workAreaSize.height,
+    autoHideMenuBar: true,
     webPreferences: {
       preload: join(__dirname, 'preload.js'),
       nodeIntegration: false,
